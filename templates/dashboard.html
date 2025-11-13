@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Scientific Dashboard</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="dark">
+  <div class="topbar">
+    <div class="title">Scientific Dashboard</div>
+    <div class="controls">
+      <button id="themeToggleDash">☀️</button>
+      <a href="/" class="dashlink">Back</a>
+    </div>
+  </div>
+  <main class="container">
+    <section class="panel">
+      <h3>Signal Plot (Last Uploaded)</h3>
+      <img src="/static/images/eeg_headset.png" alt="eeg" style="max-width:220px;float:right;margin-left:12px;border-radius:6px">
+      <img id="plotPreview" src="/static/plot.png" alt="plot" style="max-width:100%">
+    </section>
+    <section class="panel">
+      <h3>Latest Prediction</h3>
+      <div id="predLabel">-</div>
+      <div id="predConf">-</div>
+    </section>
+  </main>
+<script>
+async function refreshLatest(){
+  try{
+    const res = await fetch('/latest');
+    const j = await res.json();
+    document.getElementById('plotPreview').src = j.plot + '?t=' + Date.now();
+    document.getElementById('predLabel').textContent = 'Emotion: ' + j.label;
+    document.getElementById('predConf').textContent = 'Confidence: ' + j.confidence;
+  }catch(e){ console.log(e) }
+}
+// initial fetch
+refreshLatest();
+// refresh every 3 seconds
+setInterval(refreshLatest, 3000);
+
+document.getElementById('themeToggleDash').addEventListener('click',()=>{
+  document.body.classList.toggle('dark');
+});
+</script>
+</body>
+</html>

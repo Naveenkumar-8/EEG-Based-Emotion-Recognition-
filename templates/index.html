@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EEG Emotion Recognition — Live</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="dark">
+  <div class="topbar">
+    <div class="title">EEG Emotion Recognition</div>
+    <div class="controls">
+      <button id="themeToggle">☀️</button>
+      <a href="/dashboard" class="dashlink">Scientific Dashboard</a>
+    </div>
+  </div>
+
+  <main class="container">
+
+  <div class="banner">
+    <img src="/static/images/brainwave.png" alt="brainwave banner" style="width:100%;border-radius:8px;margin:12px 0;opacity:0.95">
+  </div>
+
+    <section class="uploader">
+      <input type="file" id="fileInput" accept=".csv,.npy">
+      <button id="startBtn">Analyze & Stream</button>
+    </section>
+
+    <section class="gallery">
+      <h2>EEG & Emotion Gallery</h2>
+      <div class="thumbs">
+        <div class="thumb"><img src="/static/images/thumb_eeg.png" alt="EEG cap"><p>EEG Cap</p></div>
+        <div class="thumb"><img src="/static/images/thumb_brainwave.png" alt="Brainwave"><p>Brainwave Patterns</p></div>
+        <div class="thumb"><img src="/static/images/thumb_spectrum.png" alt="Emotion Spectrum"><p>Emotion Spectrum</p></div>
+      </div>
+      <div class="gallery-detail">
+        <img id="galleryMain" src="/static/images/eeg_headset.png" alt="detail" style="max-width:100%">
+      </div>
+    </section>
+
+    <section class="player">
+      <div class="progressWrap">
+        <div id="progressBar" class="progressBar"></div>
+      </div>
+      <canvas id="waveCanvas" width="900" height="240"></canvas>
+      <div class="caption">Emotion changes detected over time</div>
+      <div class="status">
+        <img id="emoji" src="/static/images/neutral.svg" width="80" height="80">
+        <div class="meta">
+          <div id="label">-</div>
+          <div id="conf">-</div>
+        </div>
+      </div>
+      <div class="controlsRow">
+        <button id="replayBtn" disabled>Replay Stream</button>
+      </div>
+    </section>
+  </main>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>
